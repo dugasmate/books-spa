@@ -12,9 +12,9 @@ namespace BooksSPA.Repositories
     {
         private BooksContext booksContext;
 
-        public BookRepository(BooksContext stockContext)
+        public BookRepository(BooksContext booksContext)
         {
-            this.booksContext = stockContext;
+            this.booksContext = booksContext;
         }
 
         public async Task CreateAsync(Book book)
