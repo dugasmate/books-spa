@@ -53,9 +53,7 @@ class App extends Component {
 
   render() {
    const renderedTable = (
-  <div>
-    
-    {console.log(this.state.table)}
+     <form onSubmit={this.handleSubmit}>
     <table className="Table">
     <tr>
       <th>
@@ -71,25 +69,23 @@ class App extends Component {
     {this.state.table.map(element => (
      <tr>
      <td>
-       {element.author}
+      {element.author}
      </td>
      <td>
-     {element.title}
+      {element.title}
      </td>
      <td>
-     <button onClick={() => this.removeBook(element.id)}> x </button>
+     <button type="button" onClick={() => this.removeBook(element.id)}> x </button>
      </td>
    </tr>
     ))}
-    <tr>
-  </tr>
+  <tr>
+  <td><input type="text" placeholder="Author" onChange={this.handleChange} name="author"></input></td>
+  <td><input type="text" placeholder="Title" onChange={this.handleChange} name="title"></input></td>
+  <td><input type="submit" value="Add" /></td>
+    </tr>
   </table>
-  <form onSubmit={this.handleSubmit}>
-<input type="text" onChange={this.handleChange} name="author" required></input>
-<input type="text" onChange={this.handleChange} name="title" required></input>
-<input type="submit" value="Add" />
   </form>
-  </div>
    )
 
     return (

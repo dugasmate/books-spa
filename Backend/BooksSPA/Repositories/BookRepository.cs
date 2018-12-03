@@ -19,8 +19,11 @@ namespace BooksSPA.Repositories
 
         public async Task CreateAsync(Book book)
         {
-            await booksContext.Books.AddAsync(book);
-            await booksContext.SaveChangesAsync();
+            if (!string.IsNullOrWhiteSpace(book.Title) && !string.IsNullOrWhiteSpace(book.Author))
+            {
+                await booksContext.Books.AddAsync(book);
+                await booksContext.SaveChangesAsync();
+            }
         }
 
         public async Task<Book> ReadAsync(long id)
@@ -34,12 +37,6 @@ namespace BooksSPA.Repositories
             var books = await booksContext.Books.ToListAsync();
             var sortedBooks = books.OrderBy(x => x.Author).ThenBy(y => y.Title).ToList();
             return sortedBooks;
-        }
-
-        public async Task UpdateAsync(Book book)
-        {
-            booksContext.Books.Update(book);
-            await booksContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(long id)
