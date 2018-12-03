@@ -32,7 +32,8 @@ namespace BooksSPA.Repositories
         public async Task<List<Book>> ReadAllAsync()
         {
             var books = await booksContext.Books.ToListAsync();
-            return books;
+            var sortedBooks = books.OrderBy(x => x.Author).ThenBy(y => y.Title).ToList();
+            return sortedBooks;
         }
 
         public async Task UpdateAsync(Book book)
@@ -41,8 +42,9 @@ namespace BooksSPA.Repositories
             await booksContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Book book)
+        public async Task DeleteAsync(long id)
         {
+            var book = booksContext.Books.FirstOrDefault(x => x.Id == id);
             booksContext.Books.Remove(book);
             await booksContext.SaveChangesAsync();
         }

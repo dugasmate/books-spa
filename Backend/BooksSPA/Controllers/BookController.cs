@@ -30,5 +30,11 @@ namespace BooksSPA.Controllers
             await bookRepository.CreateAsync(book);
             return RedirectToAction("index");
         }
+        [HttpGet("index/{id}")]
+        public async Task<IActionResult> Delete([FromRoute]long id)
+        {
+            await bookRepository.DeleteAsync(id);
+            return RedirectToAction("index");
+        }
     }
 }

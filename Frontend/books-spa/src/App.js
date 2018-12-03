@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 import './App.css';
 
 class App extends Component {
@@ -24,7 +25,6 @@ class App extends Component {
         title: this.state.title,
         author: this.state.author
       }
-      console.log(book)
       fetch("https://localhost:44307/index/", {
         method: "POST",
         body: JSON.stringify(book),
@@ -33,8 +33,16 @@ class App extends Component {
           "Content-Type": "application/json"
         })
       });
-      setTimeout(this.componentWillMount, 300)
+      setTimeout(this.componentWillMount, 500)
      };
+
+     removeBook(id) {
+       console.log(id)
+      axios.get(
+        "https://localhost:44307/index/" + id
+      );
+      setTimeout(this.componentWillMount, 500);
+    }
 
     componentWillMount = () => 
     fetch("https://localhost:44307/index/", {
@@ -45,32 +53,41 @@ class App extends Component {
 
   render() {
    const renderedTable = (
-     
   <div>
+    
+    {console.log(this.state.table)}
     <table className="Table">
     <tr>
+      <th>
+        Author
+      </th>
       <th>
         Title
       </th>
       <th>
-        Author
+        Delete
       </th>
     </tr>
     {this.state.table.map(element => (
      <tr>
      <td>
-       {element.title}
+       {element.author}
      </td>
      <td>
-     {element.author}
+     {element.title}
+     </td>
+     <td>
+     <button onClick={() => this.removeBook(element.id)}> x </button>
      </td>
    </tr>
     ))}
-    </table>
-    <form onSubmit={this.handleSubmit}>
-    <input type="text" onChange={this.handleChange} name="title" required></input>
-    <input type="text" onChange={this.handleChange} name="author" required></input>
-    <input type="submit" value="Add" />
+    <tr>
+  </tr>
+  </table>
+  <form onSubmit={this.handleSubmit}>
+<input type="text" onChange={this.handleChange} name="author" required></input>
+<input type="text" onChange={this.handleChange} name="title" required></input>
+<input type="submit" value="Add" />
   </form>
   </div>
    )
