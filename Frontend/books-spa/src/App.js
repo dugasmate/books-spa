@@ -53,7 +53,7 @@ class App extends Component {
 
   render() {
    const renderedTable = (
-     <form onSubmit={this.handleSubmit}>
+    <form onSubmit={this.handleSubmit}>
     <table className="Table">
     <tr>
       <th>
@@ -63,7 +63,6 @@ class App extends Component {
         Title
       </th>
       <th>
-        Delete
       </th>
     </tr>
     {this.state.table.map(element => (
@@ -75,7 +74,7 @@ class App extends Component {
       {element.title}
      </td>
      <td>
-     <button type="button" onClick={() => this.removeBook(element.id)}> x </button>
+     <button type="button" className="X" onClick={() => this.removeBook(element.id)}> X </button>
      </td>
    </tr>
     ))}
