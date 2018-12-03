@@ -24,13 +24,9 @@ namespace BooksSPA.Controllers
             return Ok(books);
         }
 
-        [HttpGet("{author}/{title}")]
-        public async Task<IActionResult> Add(string author, string title)
+        [HttpPost("index")]
+        public async Task<IActionResult> Add([FromBody]Book book)
         {
-            var book = new Book
-            {
-                Author = author, Title = title
-        };
             await bookRepository.CreateAsync(book);
             return RedirectToAction("index");
         }
