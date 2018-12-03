@@ -31,15 +31,13 @@ class App extends Component {
       headers: new Headers({
         "Content-Type": "application/json"
       })
-    });
-    setTimeout(this.componentWillMount, 500)
+    }).then(this.componentWillMount);
   };
 
   removeBook(id) {
     axios.get(
       "https://localhost:44307/index/" + id
-    );
-    setTimeout(this.componentWillMount, 500);
+    ).then(this.componentWillMount);
   }
 
   componentWillMount = () =>
