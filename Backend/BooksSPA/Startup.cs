@@ -19,6 +19,12 @@ namespace BooksSPA
             services.AddMvc();
             services.AddScoped<BookRepository>();
             services.AddDbContext<BooksContext>(options => options.UseInMemoryDatabase("BookDB"));
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -27,6 +33,8 @@ namespace BooksSPA
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("MyPolicy");
 
             app.UseMvc();
         }

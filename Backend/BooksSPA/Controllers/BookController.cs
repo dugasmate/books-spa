@@ -18,9 +18,9 @@ namespace BooksSPA.Controllers
         }
 
         [HttpGet("index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var books = bookRepository.ReadAllAsync();
+            var books = await bookRepository.ReadAllAsync();
             return Ok(books);
         }
 
