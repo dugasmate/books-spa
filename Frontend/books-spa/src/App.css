@@ -1,7 +1,11 @@
-.Table, .Table tr, .Table th, .Table td {
+.table, .table tr, .table th, .table td {
   border: 1px solid black;
 }
 
-.X {
-  width: 100%;display:inline-block;
+.button {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
 }
